@@ -114,6 +114,38 @@ const outher2 = [
   },
 ]
 
+const images = [
+  {
+    src: "https://cdn.prod.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0c1677ce47c0_Tile__Man.webp",
+    alt: "Image 1",
+    bgimg: "bg-[#B8BAB3]",
+  },
+  {
+    src: "https://cdn.prod.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0c32c6ce47ba_Tile%20Illustrations__Pie%20Chart.webp",
+    alt: "Image 2",
+    bgimg: "bg-[#F7E1D2]",
+  },
+  {
+    src: "https://cdn.prod.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0cf161ce47c1_Tile__Woman.webp",
+    alt: "Image 3",
+    bgimg: "bg-[#B8BAB3]",
+  },
+  {
+    src: "https://cdn.prod.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0cbdf4ce47b9_Tile%20Illustrations__Laptop.webp",
+    alt: "Image 4",
+    bgimg: "bg-[#F7E1D2]",
+  },
+  {
+    src: "https://cdn.prod.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0c141ace47c2_Tile__Man%202.webp",
+    alt: "Image 5",
+    bgimg: "bg-[#B8BAB3]",
+  },
+  {
+    src: "https://cdn.prod.website-files.com/64149f79022d0c5fc8ce46e8/64149f79022d0cb7f6ce47b8_Tile%20Illustrations__Bar%20Chart.webp",
+    alt: "Image 6",
+    bgimg: "bg-[#F7E1D2]",
+  },
+]
 export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col">
@@ -524,28 +556,40 @@ export default function HomePage() {
           <div className="flex flex-col items-center gap-12 md:flex-row">
             <div className="order-2 flex-1 text-center md:order-1 md:text-left">
               <p className="text-ninja-dark mb-4 text-4xl font-bold md:text-5xl lg:text-6xl">
-                We're passionate<br></br> about our people.
+                We're passionate
+                <br /> about our people.
               </p>
               <p className="text-ninja-dark mb-8 text-xl font-bold md:text-xl">
                 Our people-first culture attracts and retains top talent.
               </p>
               <p className="text-ninja-dark mb-8 text-xl md:text-xl">
-                For nearly a decade, we've fostered the growth, wellbeing, and career<br></br> development of our team
-                members — and that's earned us industry-high talent<br></br> retention rates.
+                For nearly a decade, we've fostered the growth, wellbeing,<br /> and career
+                 development of our team members — and that's<br /> earned us industry-high talent
+                retention rates.
               </p>
               <button className="w-fit rounded-full bg-[#0D3A23] px-6 py-3 text-white hover:bg-[#0D3A23]/90">
                 <p className="font-bold">read our story</p>
               </button>
             </div>
-            <div className="order-1 flex flex-1 justify-center md:order-2 md:justify-end">
-              <Image
-                src="/images/22.png"
-                alt="Project Logo"
-                width={800}
-                height={500}
-                className="h-auto max-w-full"
-                priority
-              />
+
+            {/* Images collage */}
+            <div className="order-1 grid grid-cols-3 gap-4 md:order-2 md:w-[700px]">
+              {images.map((img, index) => (
+                <div
+                  key={index}
+                  className={`h-auto w-full overflow-hidden rounded-xl object-cover shadow-lg ${
+                    index === 2 ? "-translate-x-5 translate-y-[-20px]" : ""
+                  } ${index === 4 ? "-translate-x-5 translate-y-[20px]" : ""}`}
+                >
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    width={402} // เพิ่มขนาดความกว้าง
+                    height={402} // เพิ่มขนาดความสูง
+                    className={`${img.bgimg} h-full w-full rounded-xl object-cover`}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -798,4 +842,16 @@ export default function HomePage() {
       </footer>
     </div>
   )
+}
+
+function getImagePositionClass(index: number): string {
+  const positions = [
+    "top-0 left-0",
+    "top-0 right-0",
+    "top-1/2 left-1/4",
+    "top-1/2 right-0",
+    "bottom-0 left-0",
+    "bottom-0 right-1/4",
+  ]
+  return positions[index] || "top-0 left-0"
 }
